@@ -1,9 +1,8 @@
+package src;
+import java.util.Calendar;
 /** Date: this class defines the properties of a Date object, specifically year, month, day.
  * @author Jerry Huang, Adrian Thamburaj
  */
-
-import java.util.Calendar;
-
 public class Date {
     private int year;
     private int month;
@@ -115,7 +114,7 @@ public class Date {
         } else if(this.year == date.getYear()){ //year equal
             if (this.month > date.getMonth()){
                 return false; //month too far
-            } else if(this.month == date.getMonth() && this.day > this.getDay()){ //year equal already, checking month and day
+            } else if(this.month == date.getMonth() && this.day > date.getDay()){ //year equal already, checking month and day
                 return false; //day too far
             }
         }
@@ -132,7 +131,7 @@ public class Date {
         String toReturn = "";
         toReturn += String.valueOf(this.month) + "/";
         toReturn += String.valueOf(this.day) + "/";
-        toReturn += String.valueOf(this.year) + "/";
+        toReturn += String.valueOf(this.year);
         return toReturn;
     }
 
@@ -160,6 +159,7 @@ public class Date {
     //TESTBED
     /** Testbed main for the isValid method
      * Tests 30 dates against their correct outputs for isValid.
+     * @param args Arguments for main function
      */
     public static void main(String[]args){
         //testcase1 "12/31/1899"

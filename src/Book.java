@@ -1,7 +1,7 @@
+package src;
 /** Represents a book in the library. This class defines the abstract data type Book, which encapsulates the data fields and methods of a book. 
  * @author Jerry Huang, Adrian Thamburaj
 */
-
 public class Book {
     private String number; //a 5-digit serial number unique to the book
     private String name;

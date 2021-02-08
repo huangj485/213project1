@@ -1,3 +1,4 @@
+package src;
 /** Library - the container class that defines the abstract data type Library to hold library catalog and its operations.
  * @author Jerry Huang, Adrian Thamburaj
  */
@@ -20,7 +21,7 @@ public class Library {
      * @return An integer - the index of the book in the books array if found, -1 if it is not found.
      */
     private int find(Book book) { 
-        for (int i=0; i<this.books.length; i++){
+        for (int i=0; i<this.numBooks; i++){
             if (book.getNumber().equals(this.books[i].getNumber())){
                 return i;
             }
@@ -31,15 +32,15 @@ public class Library {
     /** Expands the library by 4 books when a user attempts to add another book and the library is at maximum capacity
      */
     private void grow() { 
-        Book[] tempBooks = new Book[this.books.length + this.minBooks];
-        for (int i=0; i<this.books.length; i++){
+        Book[] tempBooks = new Book[this.numBooks + this.minBooks];
+        for (int i=0; i<this.numBooks; i++){
             tempBooks[i] = this.books[i];
         }
         this.books = tempBooks;    
     }
     
     /** Helper method that generates new serial numbers for new books
-     * @return A String containing the new serial number
+     * @return A String containing the new serial number - the new serial number will always be the number after the last book currently in the library. This means that a new book may get a recently removed serial number, since we cannot track all books that have passed through the library in a consta
      */
     private String generateNewSerial(){ 
         if (this.numBooks == 0){
@@ -58,7 +59,7 @@ public class Library {
     public void add(Book book) {
         int toAdd = 0;
         book.setNumber(generateNewSerial());
-        while (toAdd < this.books.length && this.books[toAdd] != null){
+        while (toAdd < this.numBooks && this.books[toAdd] != null){
             toAdd++;
         }
         if (toAdd == this.books.length){
@@ -78,7 +79,7 @@ public class Library {
             return false; //unable to remove
         } else{
             this.books[foundBook] = null;
-            for(int i = foundBook; i < this.books.length-1; i++){ //moves all books up the array
+            for(int i = foundBook; i < this.numBooks-1; i++){ //moves all books up the array
                 this.books[i] = this.books[i+1];
             }
             this.numBooks--;
@@ -123,17 +124,30 @@ public class Library {
     /** Prints all the books in the catalog in the order they are listed.
      */
     public void print() {
-        for (int i=0; i<this.numBooks; i++){
-            System.out.println(this.books[i].toString());
+        if(this.numBooks == 0 ){
+            System.out.println("Library catalog is empty!");
+        } else{
+            System.out.println("**List of books in the library.");
+            for (int i=0; i<this.numBooks; i++){
+                System.out.println(this.books[i].toString());
+            }
+            System.out.println("**End of list");
         }
+        
      } //print the list of books in the catalog
 
     /** Prints all the books in the catalog, sorted by ascending date.
      */
     public void printByDate() {
-        int [] sortedIndices = this.sortByDate();
-        for(int i = 0; i < this.numBooks; i++){
-            System.out.println(this.books[sortedIndices[i]].toString());
+        if (this.numBooks == 0){
+            System.out.println("Library catalog is empty!");
+        } else{
+            System.out.println("**List of books by the dates published");
+            int [] sortedIndices = this.sortByDate();
+            for(int i = 0; i < this.numBooks; i++){
+                System.out.println(this.books[sortedIndices[i]].toString());
+            }
+            System.out.println("**End of list");
         }
     }
 
@@ -170,6 +184,16 @@ public class Library {
     */
     public void printByNumber() { 
         //Books are stored by number, so this is the same as printing normally.
-        this.print();
+        
+        if(this.numBooks == 0 ){
+            System.out.println("Library catalog is empty!");
+        } else{
+            System.out.println("**List of books by the book numbers.");
+            for (int i=0; i<this.numBooks; i++){
+                System.out.println(this.books[i].toString());
+            }
+            System.out.println("**End of list");
+        }
+       
     } 
 }
