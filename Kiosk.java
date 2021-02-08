@@ -1,15 +1,13 @@
-/*
-    @author Jerry Huang, Adrian Thamburaj
-    Kiosk class for processing the command lines from the console.
-    • This class is the user interface class that handles the input and output. You must define a run() method
-    or you will lose 5 points.
-    • You can define the data members you need and define some private methods to handle the commands.
-    Make sure you follow the ground rules and have a good programming style.
-*/
+/** Kiosk class for processing the command lines from the console.
+ * @author Jerry Huang, Adrian Thamburaj
+ */
+
 import java.util.Scanner;
 
 public class Kiosk {
 
+    /** A method to run the user interface of the Library.
+     */
     public void run() { 
         Library library = new Library();
         Scanner sc = new Scanner(System.in);
@@ -82,5 +80,7 @@ public class Kiosk {
 
             line = sc.nextLine();
         }
+
+        sc.close();
     }
 }   
